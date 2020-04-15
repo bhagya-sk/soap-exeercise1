@@ -1,0 +1,84 @@
+<xs:schema xmlns:tns="http://webservice.stocktrade.reactiveworks.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://webservice.stocktrade.reactiveworks.com/">
+  <xs:element name="getDailyTradingDifferential" type="tns:getDailyTradingDifferential"/>
+  <xs:element name="getDailyTradingDifferentialResponse" type="tns:getDailyTradingDifferentialResponse"/>
+  <xs:element name="getMaxVolumeTrade" type="tns:getMaxVolumeTrade"/>
+  <xs:element name="getMaxVolumeTradeResponse" type="tns:getMaxVolumeTradeResponse"/>
+  <xs:element name="getMinVolumeTrade" type="tns:getMinVolumeTrade"/>
+  <xs:element name="getMinVolumeTradeResponse" type="tns:getMinVolumeTradeResponse"/>
+  <xs:element name="getStockTrades" type="tns:getStockTrades"/>
+  <xs:element name="getStockTradesResponse" type="tns:getStockTradesResponse"/>
+  <xs:complexType name="getDailyTradingDifferential">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="arg0" type="tns:stockTrade"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="stockTrade">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="adjClose" type="xs:double"/>
+      <xs:element minOccurs="0" name="close" type="xs:double"/>
+      <xs:element minOccurs="0" name="date" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="high" type="xs:double"/>
+      <xs:element minOccurs="0" name="low" type="xs:double"/>
+      <xs:element minOccurs="0" name="open" type="xs:double"/>
+      <xs:element minOccurs="0" name="security" type="xs:string"/>
+      <xs:element minOccurs="0" name="volume" type="xs:double"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getDailyTradingDifferentialResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:dailyTradingDiffWrapper"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="dailyTradingDiffWrapper">
+    <xs:sequence>
+      <xs:element name="dailyTrdDiff">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="entry">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element minOccurs="0" name="key" type="xs:dateTime"/>
+                  <xs:element minOccurs="0" name="value" type="xs:double"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getMaxVolumeTrade">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="arg0" type="tns:stockTrade"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getMaxVolumeTradeResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:stockTrade"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getStockTrades">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="getStockTradesResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:stockTrade"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getMinVolumeTrade">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="arg0" type="tns:stockTrade"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getMinVolumeTradeResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:stockTrade"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="StockTradeServiceFailureException" type="tns:StockTradeServiceFailureException"/>
+  <xs:complexType name="StockTradeServiceFailureException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
